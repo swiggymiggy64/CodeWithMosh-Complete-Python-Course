@@ -148,18 +148,217 @@
 
 # * Map Functions
 
-items = [
-    ("Product1", 10),
-    ("Product2", 9),
-    ("Product3", 12),
-]
+# items = [
+#     ("Product1", 10),
+#     ("Product2", 9),
+#     ("Product3", 12),
+# ]
 
-# Instead of doing this:
-# prices = []
-# for item in items:
-#     prices.append(item[1])
+# # Instead of doing this:
+# # prices = []
+# # for item in items:
+# #     prices.append(item[1])
+# # print(prices)
+
+# # You can do this
+# prices = list(map(lambda item: item[1], items))
 # print(prices)
 
-# You can do this
-prices = list(map(lambda item: item[1], items))
-print(prices)
+# * Filter Functions
+
+# items = [
+#     ("Product1", 10),
+#     ("Product2", 9),
+#     ("Product3", 12),
+# ]
+
+# x = list(filter(lambda item: item[1] >= 10, items))
+# print(x)
+
+# * List Comprehensions
+
+# items = [
+#     ("Product1", 10),
+#     ("Product2", 9),
+#     ("Product3", 12),
+# ]
+
+# prices = list(map(lambda item: item[1], items))
+# # [expression for item in items]
+# # List comprehension, does the same as "prices" of above
+# prices = [item[1] for item in items]
+
+
+# filtered = list(filter(lambda item: item[1] >= 10, items))
+# # Does same as above, with less & is more performant
+# filtered = [item for item in items if item[1] >= 10]
+
+# * Zip Function
+
+# list1 = [1, 2, 3]
+# list2 = [10, 20, 30]
+
+# # [(1, 10), (2, 20), (3, 30)] # How do we do this list?
+
+# # list3 = list(zip(list1, list2))
+# list3 = list(zip("abc", list1, list2))
+# print(list3)
+
+# * Stacks
+# LIFO = Last In - First Out
+
+# browsing_session = []
+# browsing_session.append(1)
+# browsing_session.append(2)
+# browsing_session.append(3)
+# print("First browse", browsing_session)
+
+# last = browsing_session.pop()
+# print(last)
+# print("First back", browsing_session)
+# print("redirect", browsing_session[-1])
+
+# # browsing_session.pop()
+# # browsing_session.pop()
+# if not browsing_session:
+#     print("back button disabled")
+
+# * Queues
+# FIFO = First In - First Out
+
+# from collections import deque
+# queue = deque([])
+# queue.append(1)
+# queue.append(2)
+# queue.append(3)
+
+# queue.popleft()
+# print(queue)
+# # queue.popleft()
+# # queue.popleft()
+# if not queue:
+#     print("empty")
+
+# * Tuples
+
+# point = 1, 2  # Tuple doesnt need () & python will know it is a tuple
+# point = 1, # Also if you want a Tuple with a single item, add the trailing comma , otherwise python will think it is an int or other primitive type.
+# point = () # & if you want an empty Tuple use empty ().
+# print(type(point))
+
+# point = (1, 2) + (3, 4)  # You can concatinate tuples
+# point = (1, 2) * 3  # You can multiply to repeat = (1, 2, 1, 2, 1, 2)
+# point = tuple([1, 2])  # You can convert lists into tuples
+# print(point)
+
+# point = (1, 2, 3)
+# print(point[0])
+# print(point[0:2])
+
+# x, y, z = point
+# if 10 in point:
+#     print("Exists")
+
+# point[0] = 10
+
+# * Swapping Variables
+
+# x = 10
+# y = 11
+# print(x)
+# print(y)
+
+# # z = x
+# # x = y
+# # y = z
+
+# x, y = y, x  # This one line does what the other 3 lines do!
+# print(x)
+# print(y)
+
+# * Arrays
+
+# from array import array
+
+# numbers = array("i", [1, 2, 3])
+# numbers.append(4)
+# print(numbers)
+
+# * Sets
+
+# numbers = [1, 1, 2, 3, 4]
+# first = set(numbers)
+# second = {1, 5}
+# # print(first)
+# x = first | second
+# # print(x)
+# print(first & second)  # Shows numbers in both sets
+# print(first - second)  # Shows the difference between two sets
+# print(first ^ second)  # Shows the items either in the 1st or 2nd set but not both
+
+# # print(first[0]) # TypeError: 'set' object is not subscriptable
+# if 1 in first:
+#     print("Yes")
+
+# * Dictionaries
+
+# # point = {"x": 1, "y": 2}  # This is one way
+# point = dict(x=1, y=2)  # This way doesn't need strings & is cleaner
+# # print(point[0])  # Doesn't work, need to specify the key
+# # print(point["x"])  # This is how to get a value
+# point["x"] = 10  # Reassigning key values
+# point["z"] = 20  # Asigning a new key value pair
+# # print(point)
+
+# # If you try to search a key which doesnt exist you get an error
+# # print(point["a"])  # KeyError: 'a'
+
+# # So you can check for it in an if statement:
+# # if "a" in point:
+# #     print(point["a"])
+
+# # OR you can use the .get() method like this:
+# print(point.get("a"))  # Is much cleaner & will return "None" instead of an error
+# # Is much cleaner & will return "None" instead of an error
+# # You can even specify a return value if it didnt find the 1st arguement
+# print(point.get("a", "Oopsie Daisy!"))
+
+# del point["x"]
+# # print(point)
+
+# for key in point:
+#     print("Way 1:", key, point[key])
+
+# for x in point.items():
+#     print("Way 2:", x)
+
+# for key, value in point.items():
+#     print("Way 3:", key, value)
+
+# * Dictionary Comprehensions
+
+# These 3 lines below:
+# values = []
+# for x in range(5):
+#     values.append(x * 2)
+
+# Are the same as this single line:
+# values = [x * 2 for x in range(5)]  # List
+# values = {x * 2 for x in range(5)}  # Set: [] to {} =  List to Set
+# The difference between a Set & a Dictionary is that Sets just have values:
+# {1, 2, 3}
+# But Dictionaries have key value pairs which are separated by a colon:
+# {"x": 1, "y": 2, "z": 3} # OR
+# {1: "a", 2: "b", 3: "c"}
+
+# So going back to this:
+# values = {x * 2 for x in range(5)}  # Set
+# We can change it into a dictionary like this:
+# values = {x: x * 2 for x in range(5)}
+# print(values)
+
+# We can use tuples as well
+# values = (x * 2 for x in range(5))
+# print(values)
+
+# * Generator Expressions
