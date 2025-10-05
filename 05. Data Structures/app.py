@@ -121,10 +121,8 @@
 #     ("Product3", 12),
 # ]
 
-
 # def sort_item(item):
 #     return item[1]
-
 
 # items.sort(key=sort_item)
 # print(items)
@@ -187,7 +185,6 @@
 # # [expression for item in items]
 # # List comprehension, does the same as "prices" of above
 # prices = [item[1] for item in items]
-
 
 # filtered = list(filter(lambda item: item[1] >= 10, items))
 # # Does same as above, with less & is more performant
@@ -358,7 +355,57 @@
 # print(values)
 
 # We can use tuples as well
-# values = (x * 2 for x in range(5))
+# values = (x * 2 for x in range(5)) # Generator Object
 # print(values)
 
 # * Generator Expressions
+
+# from sys import getsizeof
+
+# # values = [x * 2 for x in range(10)] # List
+# values = (x * 2 for x in range(1000000))  # Generator Object
+# print("gen:", getsizeof(values))
+# # print(len(values)) # Doesnt work
+# values = [x * 2 for x in range(1000000)]  # List Object
+# print("list:", getsizeof(values))
+
+# * Unpacking Operator
+
+# numbers = [1, 2, 3]
+# print(numbers)
+# print(*numbers)
+
+# values = list(range(5))
+# print(values)
+# values = [*range(5), *"Hello"]
+# print(values)
+
+# first = [1, 2]
+# second = [3]
+# values = [*first, "a", *second, *"Hello"]
+# print(values)
+
+# first = {"x": 1}
+# second = {"x": 10, "y": 2}
+# combined = {**first, **second, "z": 1}
+# print(combined)
+
+# * Exercise
+
+# 1. Find the most repeated character in this sentence
+sentence = "This is a common interview question"
+
+char_freq = {}
+for char in sentence:
+    if char in char_freq:
+        char_freq[char] += 1
+    else:
+        char_freq[char] = 1
+# print(char_freq)
+
+sorted_char_freq = sorted(
+    char_freq.items(),  # Convert into Tuples
+    key=lambda kv: kv[1],  # Return the 2nd value
+    reverse=True)
+
+print(sorted_char_freq[0])
