@@ -387,47 +387,152 @@
 
 # * Abstract Base Classes
 
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 
 
-class InvalidOperationError(Exception):
-    pass
+# class InvalidOperationError(Exception):
+#     pass
 
 
-class Stream(ABC):
-    def __init__(self):
-        self.opened = False
+# class Stream(ABC):
+#     def __init__(self):
+#         self.opened = False
 
-    def open(self):
-        if self.opened:
-            raise InvalidOperationError("Stream is already open.")
-        self.opened = True
+#     def open(self):
+#         if self.opened:
+#             raise InvalidOperationError("Stream is already open.")
+#         self.opened = True
 
-    def close(self):
-        if not self.opened:
-            raise InvalidOperationError("Stream is already closed.")
-        self.opened = False
+#     def close(self):
+#         if not self.opened:
+#             raise InvalidOperationError("Stream is already closed.")
+#         self.opened = False
 
-    @abstractmethod
-    def read(self):
-        pass
-
-
-class FileStream(Stream):
-    def read(self):
-        print("Reading data from a file.")
+#     @abstractmethod
+#     def read(self):
+#         pass
 
 
-class NetworkStream(Stream):
-    def read(self):
-        print("Reading data from a network.")
+# class FileStream(Stream):
+#     def read(self):
+#         print("Reading data from a file.")
 
 
-class MemoryStream(Stream):  # This now requires the read method
-    def read(self):
-        print("Reading data from a memory stream.")
+# class NetworkStream(Stream):
+#     def read(self):
+#         print("Reading data from a network.")
 
 
-# stream = Stream()  # Stream shoud only be an abstract base class
-# stream = open()
-stream = MemoryStream()
+# class MemoryStream(Stream):  # This now requires the read method
+#     def read(self):
+#         print("Reading data from a memory stream.")
+
+
+# # stream = Stream()  # Stream shoud only be an abstract base class
+# # stream = open()
+# stream = MemoryStream()
+
+# * Polymorphism
+
+# from abc import ABC, abstractmethod
+
+
+# class UIControl(ABC):
+#     @abstractmethod
+#     def draw(self):
+#         pass
+
+
+# class TextBox(UIControl):
+#     def draw(self):
+#         print("TextBox")
+
+
+# class DropDownList(UIControl):
+#     def draw(self):
+#         print("DropDownList")
+
+
+# def draw(controls):
+#     for control in controls:
+#         control.draw()
+
+
+# ddl = DropDownList()
+# # print(isinstance(ddl, UIControl))
+# # draw(ddl)
+
+# textbox = TextBox()
+# # draw(textbox)
+# draw([ddl, textbox])
+
+# * Duck Typing
+
+# from abc import ABC, abstractmethod
+
+
+# class TextBox:
+#     def draw(self):
+#         print("TextBox")
+
+
+# class DropDownList:
+#     def draw(self):
+#         print("DropDownList")
+
+
+# def draw(controls):
+#     for control in controls:
+#         control.draw()
+
+
+# ddl = DropDownList()
+# textbox = TextBox()
+# draw([ddl, textbox])
+
+# * Extending Built-in Types
+
+# class Text(str):
+#     def duplicate(self):
+#         return self + self
+
+
+# class TrackableList(list):
+#     def append(self, object):
+#         print("Append called")
+#         super().append(object)
+
+
+# text = Text("Python")
+# print(text.lower())
+# print(text.duplicate())
+
+# list = TrackableList()
+# list.append("1")
+
+# * Data Classes
+
+from collections import namedtuple
+
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+
+#     def __eq__(self, other):
+#         return self.x == other.x and self.y == other.y
+
+
+# p1 = Point(1, 2)
+# p2 = Point(1, 2)
+# print(p1 == p2)  # False, is now true with __eq__
+# print(id(p1))
+# print(id(p2))
+
+# This is the same as above!
+Point = namedtuple("Point", ["x", "y"])
+p1 = Point(x=1, y=2)
+p2 = Point(x=1, y=2)
+print(p1 == p2)  # True, no need to __eq__
+p1.x = 10  # AttributeError: can't set attribute, immutable = cant edit
