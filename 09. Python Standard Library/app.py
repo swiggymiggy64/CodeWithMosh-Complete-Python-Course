@@ -106,3 +106,65 @@
 #     zip.extractall("extract")
 
 # * Working With CSV Files
+
+import csv
+
+# # Creating a csv file & writing data to it
+# # with open("data.csv", "w") as file:
+# #     writer = csv.writer(file)
+# #     writer.writerow(["transaction_id", "product_id", "price"])
+# #     writer.writerow([1000, 1, 5])
+# #     writer.writerow([1001, 2, 15])
+
+# # Reading data from a CSV file
+# with open("data.csv") as file:
+#     reader = csv.reader(file)
+#     # print(list(reader))
+#     for row in reader:
+#         print(row)
+
+# * Working With JSON Files
+
+# import json
+# from pathlib import Path
+
+# # movies = [
+# #     {"id": 1, "title": "Terminator", "year": 1989},
+# #     {"id": 2, "title": "Kindergarten Cop", "year": 1993}
+# # ]
+
+# # data = json.dumps(movies)
+# # Path("movies.json").write_text(data)
+
+# data = Path("movies.json").read_text()
+# # print(data)
+# movies = json.loads(data)
+# print(movies)
+# print(movies[0]["title"])
+
+# * Working with a SQLite Database
+
+import sqlite3
+import json
+from pathlib import Path
+
+# . Connecting to a sqlite db & adding data to it
+# movies = json.loads(Path("movies.json").read_text())
+# print(movies)
+
+# with sqlite3.connect("db.sqlite3") as conn:
+#     command = "INSERT INTO Movies VALUES(?, ?, ?)"
+#     for movie in movies:
+#         conn.execute(command, tuple(movie.values()))
+#     conn.commit()
+
+# . Reading data from a db
+with sqlite3.connect("db.sqlite3") as conn:
+    command = "SELECT * FROM Movies"
+    cursor = conn.execute(command)
+    # for row in cursor:
+    #     print(row)
+    movies = cursor.fetchall()
+    print(movies)
+
+# * Working with  Timestamps
