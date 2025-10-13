@@ -144,27 +144,144 @@ import csv
 
 # * Working with a SQLite Database
 
-import sqlite3
-import json
-from pathlib import Path
+# import sqlite3
+# import json
+# from pathlib import Path
 
-# . Connecting to a sqlite db & adding data to it
-# movies = json.loads(Path("movies.json").read_text())
-# print(movies)
+# # . Connecting to a sqlite db & adding data to it
+# # movies = json.loads(Path("movies.json").read_text())
+# # print(movies)
 
+# # with sqlite3.connect("db.sqlite3") as conn:
+# #     command = "INSERT INTO Movies VALUES(?, ?, ?)"
+# #     for movie in movies:
+# #         conn.execute(command, tuple(movie.values()))
+# #     conn.commit()
+
+# # . Reading data from a db
 # with sqlite3.connect("db.sqlite3") as conn:
-#     command = "INSERT INTO Movies VALUES(?, ?, ?)"
-#     for movie in movies:
-#         conn.execute(command, tuple(movie.values()))
-#     conn.commit()
-
-# . Reading data from a db
-with sqlite3.connect("db.sqlite3") as conn:
-    command = "SELECT * FROM Movies"
-    cursor = conn.execute(command)
-    # for row in cursor:
-    #     print(row)
-    movies = cursor.fetchall()
-    print(movies)
+#     command = "SELECT * FROM Movies"
+#     cursor = conn.execute(command)
+#     # for row in cursor:
+#     #     print(row)
+#     movies = cursor.fetchall()
+#     print(movies)
 
 # * Working with  Timestamps
+
+# import time
+
+# # da_time = time.time()
+# # print(da_time)
+
+
+# def send_emails():
+#     for i in range(10000):
+#         pass
+
+
+# start = time.time()
+# send_emails()
+# end = time.time()
+# duration = end - start
+# print(duration)
+
+# * Working with  DateTimes
+
+# from datetime import datetime
+# import time
+
+# da_datetime = datetime(2018, 1, 1)
+# da_datetime = datetime.now()
+# da_datetime = datetime.strptime("2018/01/01", "%Y/%m/%d")
+# print(da_datetime)
+
+# da_time = datetime.fromtimestamp(time.time())
+# print(da_time)
+# print(f"{da_datetime.year}/{da_datetime.month}")
+# da_datetime.strftime("%Y/%m")
+
+# * Working with  Time Deltas
+
+# from datetime import datetime, timedelta
+
+# # dt1 = datetime(2018, 1, 1)
+# dt1 = datetime(2018, 1, 1) + timedelta(days=1, seconds=1000)
+# dt2 = datetime.now()
+
+# duration = dt2 - dt1
+# print(duration)
+# print("days", duration.days)
+# print("seconds", duration.seconds)
+# print("total seconds", duration.total_seconds())
+
+# * Generating Random Values
+# import random
+# import string
+
+# print(random.random())
+# print(random.randint(1, 10))
+# print(random.choice([1, 2, 3, 4]))
+# print(random.choices([1, 2, 3, 4], k=2))
+# print(",".join(random.choices(string.ascii_letters + string.digits, k=4)))
+
+# numbers = [1, 2, 3, 4]
+# random.shuffle(numbers)
+# print(numbers)
+
+# * Opening the Browser
+
+# import webbrowser
+
+# print("Deployment completed")
+# webbrowser.open("http://google.com")
+
+# * Sending Emails
+
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+# from email.mime.image import MIMEImage
+# from pathlib import Path
+# import smtplib
+
+# message = MIMEMultipart()
+# message["from"] = "Mig"
+# message["to"] = "test@hotmail.com"
+# message["subject"] = "This is a test email via Python!"
+# message.attach(MIMEText("Body"))
+# # message.attach(MIMEImage(Path("image.png").read_bytes()))
+
+# with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+#     smtp.ehlo()
+#     smtp.starttls()
+#     smtp.login("test@hotmail.com", "password")
+#     smtp.send_message(message)
+#     print("sent...")
+
+# * Working with Templates
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from pathlib import Path
+from string import Template
+import smtplib
+
+template = Template(Path("template.html").read_text())
+# template.substitute()
+
+message = MIMEMultipart()
+message["from"] = "Mig"
+message["to"] = "test@hotmail.com"
+message["subject"] = "This is a test email via Python!"
+# body = template.substitute({"name": "John"})
+body = template.substitute(name="John")
+message.attach(MIMEText(body, "html"))
+# message.attach(MIMEImage(Path("image.png").read_bytes()))
+
+with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.login("test@hotmail.com", "password")
+    smtp.send_message(message)
+    print("sent...")
