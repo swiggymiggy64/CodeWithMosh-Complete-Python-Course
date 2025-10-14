@@ -260,28 +260,69 @@ import csv
 
 # * Working with Templates
 
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from pathlib import Path
-from string import Template
-import smtplib
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+# from email.mime.image import MIMEImage
+# from pathlib import Path
+# from string import Template
+# import smtplib
 
-template = Template(Path("template.html").read_text())
-# template.substitute()
+# template = Template(Path("template.html").read_text())
+# # template.substitute()
 
-message = MIMEMultipart()
-message["from"] = "Mig"
-message["to"] = "test@hotmail.com"
-message["subject"] = "This is a test email via Python!"
-# body = template.substitute({"name": "John"})
-body = template.substitute(name="John")
-message.attach(MIMEText(body, "html"))
-# message.attach(MIMEImage(Path("image.png").read_bytes()))
+# message = MIMEMultipart()
+# message["from"] = "Mig"
+# message["to"] = "test@hotmail.com"
+# message["subject"] = "This is a test email via Python!"
+# # body = template.substitute({"name": "John"})
+# body = template.substitute(name="John")
+# message.attach(MIMEText(body, "html"))
+# # message.attach(MIMEImage(Path("image.png").read_bytes()))
 
-with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.login("test@hotmail.com", "password")
-    smtp.send_message(message)
-    print("sent...")
+# with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
+#     smtp.ehlo()
+#     smtp.starttls()
+#     smtp.login("test@hotmail.com", "password")
+#     smtp.send_message(message)
+#     print("sent...")
+
+# * Command-line Arguements
+
+# import sys
+
+# # print(sys.argv)
+
+# if len(sys.argv) == 1:
+#     print("Usage: python app.py <password>")
+# else:
+#     password = sys.argv[1]
+#     print("Password", password)
+
+# * Running External Programs
+
+# import subprocess
+
+# #. Legacy outdated
+# # subprocess.call
+# # subprocess.check_call
+# # subprocess.check_output
+# # subprocess.Popen
+
+# try:
+#     # result = subprocess.run(["ls", "-l"]) # for Unix
+#     completed = subprocess.run(
+#         # ["cmd", "/c", "dir"],
+#         ["python", "other.py"],
+#         capture_output=True,
+#         text=True,
+#         check=True
+#     )
+#     # completed.args
+#     print("args", completed.args)
+#     print("returncode", completed.returncode)
+#     print("stderr", completed.stderr)
+#     print("stdout", completed.stdout)
+#     if completed.returncode != 0:
+#         print(completed.stderr)
+# except subprocess.CalledProcessError as ex:
+#     print(ex)
