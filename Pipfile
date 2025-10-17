@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 requests = "*"
+numpy = "*"
+django = "==2.1"
 
 [dev-packages]
 
