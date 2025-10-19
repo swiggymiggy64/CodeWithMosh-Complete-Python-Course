@@ -3,6 +3,9 @@
 
 # * Your First Django Project
 
+# mkdir vidly
+# cd vidly
 # pipenv install django==2.1
-# cd to vidly folder
+# pipenv shell
 # django-admin startproject vidly .
+# code .

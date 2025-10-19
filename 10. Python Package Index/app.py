@@ -45,7 +45,7 @@
 # pipenv graph
 # pipenv install requests==2.9.*
 # pipenv update --outdated
-# pipenv update requests 
+# pipenv update requests
 
 # * Publishing Packages
 
